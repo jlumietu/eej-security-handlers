@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/240/trunk/eej-security-handlers/src/main/java/com/eej/security/provider
+END
+WebServiceAuthenticationProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/!svn/ver/240/trunk/eej-security-handlers/src/main/java/com/eej/security/provider/WebServiceAuthenticationProvider.java
+END
+TokenAuthenticationProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/provider/TokenAuthenticationProvider.java
+END

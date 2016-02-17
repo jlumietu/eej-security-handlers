@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+
+
+	<beans:bean id="customSuccessHandler" class="com.ib.garraiotech.util.security.CustomAuthenticationSuccessHandler" >
+  		<beans:property name="uriResolverMap">
+			<beans:map>
+				<!-- beans:entry key="/admcp/" value="/admcp/main.htm" /-->
+				<beans:entry key="/admcp/" value="/admcp/welcome.htm" />
+				<beans:entry key="gestitrans" value="/gt/welcome.htm" />
+			</beans:map>
+		</beans:property>
+		<beans:property name="securityHandlerResolverFactory" ref="securityHandlerResolverFactory" />
+  	</beans:bean>
+  	
+  	<beans:bean id="customFailureHandler" class="com.ib.garraiotech.util.security.CustomAuthenticationFailureHandler" >
+  		<beans:property name="uriResolverMap">
+			<beans:map>
+				<beans:entry key="/admcp/" value="/admcp/loginfailed.htm" />
+				<beans:entry key="gestitrans" value="/loginfailed.htm" />
+			</beans:map>
+		</beans:property>
+  	</beans:bean>
+  	
+  	<beans:bean id="customLogoutSuccessHandler" class="com.ib.garraiotech.util.security.CustomLogoutSuccessHandler" >
+  		<beans:property name="uriResolverMap">
+			<beans:map>
+				<!-- beans:entry key="/admcp/" value="/admcp/logout.htm" /-->
+				<beans:entry key="/admcp/" value="/home.htm" />
+				<beans:entry key="gestitrans" value="/home.htm" />
+			</beans:map>
+		</beans:property>
+  	</beans:bean>
+  	
+  	<beans:bean id="securityHandlerResolverFactory" class="com.ib.garraiotech.model.security.SecurityHandlerExceptionResolverFactory">
+  		<beans:property name="handlerResolvers">
+			<beans:list>
+				<beans:bean id="gestitrans" class="com.ib.garraiotech.model.security.SecurityHandlerExceptionResolver">
+					<beans:property name="pattern" value="gestitrans" />
+					<beans:property name="role" value="ROLE_ADMIN" />
+					<beans:property name="successLoginUri" value="/admcp/welcome.htm" />
+					<!-- beans:property name="successLoginUri" value="/admcp/main.htm" /-->
+					<beans:property name="failureLoginUri" value="/admcp/loginfailed.htm" />
+					<beans:property name="successLogoutUri" value="/admcp/logout.htm" />
+				</beans:bean>
+			</beans:list>
+  		</beans:property>
+  	</beans:bean>
+  
+  </beans:beans>

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/service/model
+END
+TokenValidationRequestBaseImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/service/model/TokenValidationRequestBaseImpl.java
+END
+TokenValidationRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/service/model/TokenValidationRequest.java
+END
+TokenValidationResponseBaseImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/service/model/TokenValidationResponseBaseImpl.java
+END
+TokenValidationResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/333/trunk/eej-security-handlers/src/main/java/com/eej/security/service/model/TokenValidationResponse.java
+END

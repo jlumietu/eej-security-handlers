@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd" default-lazy-init="true">
+       
+    	       
+    <!-- Declaración de los filtros -->
+	<http 
+	entry-point-ref="formAuthenticationEntryPoint"  
+	authentication-manager-ref="mainAuthenticationManager" 
+	disable-url-rewriting="true" use-expressions="true">
+		<!-- requires-channel="https" en todas las urls -->
+	
+		<!-- no aplicar seguridad a estáticos -->
+   		<!-- Páginas que son públicas y no hace falta estar loggeado para poder acceder -->
+   		<intercept-url pattern="/proveedor/**" access="ROLE_PROVEEDOR"/>
+   		<intercept-url pattern="/empleado/**" access="ROLE_EMP"/>
+   		<intercept-url pattern="/empleado/administrador/**" access="ROLE_ADMIN"/>
+   		<intercept-url pattern="/empleado/gestor/**" access="ROLE_GESTOR"/>
+   		<intercept-url pattern="/empleado/revisor/**" access="ROLE_REVISOR"/>
+   		
+   		<!-- pagina login, logout, login error,. etc, si esta dentro de alguna de las secciones securizadas -->   		  		
+        <intercept-url pattern="/jkn_opkn/loginKutxanet*" access="permitAll" />
+   		
+   		
+		<!-- otras expresiones posibles en access 
+		<intercept-url pattern="/jkn_broker/BrokerOp" access="isFullyAuthenticated() and authentication.details.isUsuarioPrecargado() or request.session.getAttribute('s_entidad')!='2101'" />
+		-->
+		
+		<form-login 
+			login-page="/admcp/login.htm" 
+			login-processing-url="/performLogin.htm"   
+			default-target-url="/admcp/welcome.htm" 
+			always-use-default-target="true"
+			authentication-failure-url="/admcp/loginfailed.htm" 
+			authentication-success-handler-ref="customSuccessHandler"
+			authentication-failure-handler-ref="customFailureHandler"
+		/>
+		<logout logout-url="/performLogout.htm" 
+			success-handler-ref="customLogoutSuccessHandler"
+		/>			
+
+    	<!-- Configuración AVANZADA filtros -->
+    	<!-- <custom-filter after="SECURITY_CONTEXT_FILTER" ref="filtroDeteccionEntorno" /> -->
+    	<!-- <custom-filter before="LOGOUT_FILTER" ref="filtroContextoUsuario" /> -->
+    	<!-- custom-filter position="LOGOUT_FILTER" ref="logoutFilter" />   	
+    	<custom-filter position="PRE_AUTH_FILTER" ref="filtroSingleLogon" />
+    	<custom-filter before="FORM_LOGIN_FILTER" ref="demoAuthenticationFilter" />
+    	<custom-filter position="FORM_LOGIN_FILTER" ref="formAuthenticationFilter" />
+    	<custom-filter after="FORM_LOGIN_FILTER" ref="otpAuthenticationFilter" /-->
+    	<!-- <custom-filter after="FORM_LOGIN_FILTER" ref="BMPruebasAuthenticationFilter" />-->
+    	<!-- custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filtroCambioUsuario"/-->
+    	
+    	
+    	<session-management session-fixation-protection="none" /><!--  ?????????????? -->
+    	
+    	<!-- Concurrent Session Control (no funcionaría en cluster)-->
+    	<!-- Session Fixation Attack Protection (no funcionaría en cluster)-->
+    	<!-- página para los errores 403 de acceso denegado -->
+    	<!-- página para los errores 500 de excepción, no tiene que salir por pantalla el error interno -->
+  	</http>
+  	
+  	  	 	
+  	<!-- Handler que se encarga de hacer la precarga, una vez que el usuario esta autenticado -->
+	<beans:bean id="customSuccessHandler" class="com.ke.web.infra.security.authentication.CustomSuccessHandler">
+		<beans:property name="selUsuarioUrl" value="${url.selUsuario}" />
+		<beans:property name="errorUrl" value="${url.error}" />
+		<beans:property name="precargaService" ref="precargaService"/>
+		<beans:property name="contextoUsuario" ref="contextoUsuario" />
+	</beans:bean>
+  	
+  	<!-- Authentication Providers -->
+  	<authentication-manager alias="authenticationManager">
+  		
+  		<!--  Llamada al authentication manager por web service, definido justo abajo -->
+  		<authentication-provider ref="loginAuthenticationProvider" />
+    	
+  	</authentication-manager>
+  	
+  	<!-- ORIGINAL beans:bean id="loginAuthenticationProvider" class="com.ke.web.infra.security.providers.LoginAuthenticationProvider"/ -->
+  	<beans:bean id="loginAuthenticationProvider" class="ccom.eej.security.provider.WebServiceAuthenticationProvider">
+  		<beans:property name="userTypeRoleMap">
+  			<beans:map>
+  				<beans:entry key="gestor">	
+  					<beans:list>
+  						<beans:value>ROLE_GESTOR</beans:value>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_ADMIN</beans:value>
+  						<beans:value>ROLE_REVISOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="administrador">	
+  					<beans:list>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_ADMIN</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="revisor">	
+  					<beans:list>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_REVISOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="proveedor">	
+  					<beans:list>
+  						<beans:value>ROLE_PROVEEDOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  			</beans:map>
+  		
+  		
+  		</beans:property>
+  	</beans:bean> 	
+  	
+</beans:beans>
+

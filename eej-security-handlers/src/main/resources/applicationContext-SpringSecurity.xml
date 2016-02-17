@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.0.xsd" default-lazy-init="true">
+       
+    <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		 <beans:property name="properties">
+   			<beans:props>
+   				<beans:prop key="url.login">/kesrv/login/Login.faces</beans:prop>
+   				<beans:prop key="url.homeSmartphone">/kesrv/publico/Principal.faces?modo=smartphone</beans:prop>
+   				<beans:prop key="url.homeTablet">/kesrv/publico/Principal.faces?modo=tablet</beans:prop>
+   				<beans:prop key="url.loginError">/kesrv/login/LoginError.faces</beans:prop>
+   				<beans:prop key="url.selUsuario">/kesrv/login/SeleccionarUsuario.faces</beans:prop>
+      			<beans:prop key="url.desconexion">${url.login}</beans:prop>
+      			<beans:prop key="url.desconexionInactividad">/kesrv/desconectar/DesconectarInactividad.faces</beans:prop>
+      			<beans:prop key="url.error">/kesrv/error/Error.faces</beans:prop>
+      			<beans:prop key="url.navegadorNoSoportado">/kesrv/login/NavegadorNoSoportado.faces</beans:prop>
+      			<beans:prop key="url.sesionCaducadaDialog">/kesrv/error/SesionCaducadaDialog.faces</beans:prop>
+   			</beans:props>
+  		 </beans:property>
+	</beans:bean>
+    
+    <!-- Handler que se ocupa de hacer redirect a la web de inactividad cuando se desconecta por inactividad 
+  	-->
+  	<beans:bean id="keLogoutSuccessHandler" class="com.ke.infra.e9999.security.handler.KeLogoutSuccessHandler">
+  		<beans:constructor-arg name="inactividadUrl" type="java.lang.String" value="${url.desconexionInactividad}"/>
+  		<beans:constructor-arg name="cerrarVentanaUrl" type="java.lang.String" value="/kesrv/desconectar/DesconectarCerrar.faces" />
+  		
+  		<!--<beans:constructor-arg name="defaultTargetKey" type="java.lang.String" value="url.home" />-->
+  		<beans:property name="defaultTargetKeys">
+  			<beans:map>
+  				<beans:entry key="DESKTOP" value="url.home" />
+  				<beans:entry key="MOVIL" value="url.login"/>
+  				<beans:entry key="SMARTPHONE" value="url.homeSmartphone"/>
+  				<beans:entry key="TABLET" value="url.homeTablet"/>
+  				<beans:entry key="KIOSKO" value="url.home" />
+  			</beans:map>
+  		</beans:property>
+  		<beans:property name="contextoInfraestructura" ref="contextoInfraestructura"></beans:property>
+  		<beans:property name="urlsExternasProperties" ref="urlsExternasProperties"></beans:property>
+  	</beans:bean>
+  	
+  	<!-- Servicio de infraestructura implementado en el core  -->
+  	<beans:bean id="desconexionService" class="com.ke.core.infra.services.DesconexionServiceImpl" />
+  	
+  	
+	<beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<beans:constructor-arg index="0" ref="keLogoutSuccessHandler" />
+		<beans:constructor-arg index="1">
+			<beans:list>
+				<beans:bean id="keLogoutHandler" class="com.ke.infra.e9999.security.handler.KeLogoutHandler">
+					<beans:property name="desconexionService" ref="desconexionService" />
+				</beans:bean>
+				<beans:bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" >
+					<beans:property name="invalidateHttpSession" value="false" />
+				</beans:bean>
+			</beans:list>
+		</beans:constructor-arg>
+		<beans:property name="filterProcessesUrl" value="/kesrv/desconectar"></beans:property>
+	</beans:bean>
+  	
+  	       
+    <!-- Declaración de los filtros -->
+	<http entry-point-ref="formAuthenticationEntryPoint"  disable-url-rewriting="true" use-expressions="true">
+		<!-- requires-channel="https" en todas las urls -->
+	
+		<!-- no aplicar seguridad a estáticos -->
+   		<!-- Páginas que son públicas y no hace falta estar loggeado para poder acceder -->
+   		<intercept-url pattern="/kesrv/login/Invidentes.faces" access="request.session.getAttribute('s_entidad')=='2101'"/>
+   		<intercept-url pattern="/kesrv/login/Login.faces*" access="request.session.getAttribute('s_entidad')=='2101'" />
+		<intercept-url pattern="/kesrv/login/createPinpad" access="request.session.getAttribute('s_entidad')=='2101'" />
+   		<intercept-url pattern="/kesrv/scripts/x4sc.js" access="request.session.getAttribute('s_entidad')=='2101'" />
+   		<intercept-url pattern="${url.error}" access="permitAll" />
+   		<intercept-url pattern="${url.loginError}" access="permitAll" />
+   		<intercept-url pattern="/kesrv/error/ErrorNoCookies.faces" access="permitAll" />  
+		<intercept-url pattern="${url.navegadorNoSoportado}" access="permitAll"/>
+   		<intercept-url pattern="/jkn_opkn/ListaPagosCSB" access="permitAll" />
+   		<intercept-url pattern="/movilsrv/login/SeleccionarIdioma.faces" access="permitAll" /><!-- request.session.getAttribute('movil')=='1' -->
+   		<intercept-url pattern="/movilsrv/login/Redirigir.faces" access="permitAll" />
+   		<intercept-url pattern="/kesrv/login/Redirigir.faces" access="permitAll" />
+   		<intercept-url pattern="/kesrv/error/ErrorNoEsMovil.faces" access="permitAll" />
+   		<intercept-url pattern="/jkn_movil/tmpl/es/avisolegal.jsp" access="permitAll" />
+   		<intercept-url pattern="/jkn_movil/tmpl/es/atencioncliente.jsp" access="permitAll" />
+   		<intercept-url pattern="/jkn_opkn/tmpl/es/infoseguridad.jsp" access="permitAll" />
+   		  		
+        <!-- Mensage despues de desconexion inactividad -->
+        <intercept-url pattern="${url.desconexionInactividad}" access="permitAll" />
+        <intercept-url pattern="${url.sesionCaducadaDialog}" access="permitAll" />
+        <!-- Acceso con dni electrónico -->
+        <intercept-url pattern="/kesrv/login/LoginDni.faces*" access="permitAll" />
+        <!-- Acceso ONA/IZENPE -->
+        <intercept-url pattern="/kesrv/login/LoginIzenpe.faces*" access="permitAll" />
+
+		<!-- Página para cerrar ventana -->
+		<intercept-url pattern="/kesrv/desconectar/DesconectarCerrar.faces" access="permitAll" />
+   		
+   		<!-- Página para cambiar idioma -->
+   		<intercept-url pattern="/kesrv/comun/CambiarIdioma.faces" access="permitAll" />
+   		
+   		<!-- Pagina de los links externos -->
+   		<intercept-url pattern="/jkn_opkn/loginKutxanet*" access="permitAll" />
+   		
+   		<!-- Parte pública de los smartphone -->
+   		<intercept-url pattern="/kesrv/publico/**" access="permitAll" />
+   		<intercept-url pattern="/smartphonesrv/publico/**" access="permitAll" />
+   		
+   		<!-- TOKEN OTP: descarga aplicación desde móviles -->
+		<intercept-url pattern="/movilsrv/seguridad/DescargaOTP.faces" access="permitAll" />
+   		
+    	<intercept-url pattern="/kesrv/desconectar/DesconectarConfirmar.faces" access="isFullyAuthenticated()" />
+   		<!-- Páginas privadas, por defecto todas -->
+   		<intercept-url pattern="${url.selUsuario}" access="isFullyAuthenticated() and authentication.principal.usuarioAutenticado.isTieneUsuariosRelacionados()" /> <!-- requires-channel="https" -->
+   		
+   		<!-- Protegemos transferencias, para que no pueda acceder nadie 
+   		<intercept-url pattern="/kesrv/transferencias/**" access="denyAll" />
+   		<intercept-url pattern="/kesrv/firma/**" access="denyAll" />-->
+   		
+   		<!-- El resto de urls de la parte JSF están securizadas -->
+    	<intercept-url pattern="/kesrv/**" access="isFullyAuthenticated() and authentication.details.isUsuarioPrecargado()" />
+    	<intercept-url pattern="/movilsrv/**" access="isFullyAuthenticated() and authentication.details.isUsuarioPrecargado()" />
+    	<intercept-url pattern="/smartphonesrv/**" access="isFullyAuthenticated() and authentication.details.isUsuarioPrecargado()" />
+		<intercept-url pattern="/jkn_broker/BrokerOp" access="isFullyAuthenticated() and authentication.details.isUsuarioPrecargado() or request.session.getAttribute('s_entidad')!='2101'" />
+
+    	<!-- Configuración filtros -->
+    	<!-- <custom-filter after="SECURITY_CONTEXT_FILTER" ref="filtroDeteccionEntorno" /> -->
+    	<!-- <custom-filter before="LOGOUT_FILTER" ref="filtroContextoUsuario" /> -->
+    	<custom-filter position="LOGOUT_FILTER" ref="logoutFilter" />   	
+    	<custom-filter position="PRE_AUTH_FILTER" ref="filtroSingleLogon" />
+    	<custom-filter before="FORM_LOGIN_FILTER" ref="demoAuthenticationFilter" />
+    	<custom-filter position="FORM_LOGIN_FILTER" ref="formAuthenticationFilter" />
+    	<custom-filter after="FORM_LOGIN_FILTER" ref="otpAuthenticationFilter" />
+    	<!-- <custom-filter after="FORM_LOGIN_FILTER" ref="BMPruebasAuthenticationFilter" />-->
+    	<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="filtroCambioUsuario"/>
+    	<session-management session-fixation-protection="none" />
+    	
+    	<!-- Concurrent Session Control (no funcionaría en cluster)-->
+    	<!-- Session Fixation Attack Protection (no funcionaría en cluster)-->
+    	<!-- página para los errores 403 de acceso denegado -->
+    	<!-- página para los errores 500 de excepción, no tiene que salir por pantalla el error interno -->
+  	</http>
+  	
+  	<!-- ***Configuración extra de los filtros*** 
+  	<beans:bean id="filtroContextoUsuario" class="com.ke.web.e9999.precarga.contexto.FiltroContextoUsuario"/>
+  	<beans:bean id="filtroDeteccionEntorno" class="com.ke.web.e9999.login.entorno.FiltroDetectarEntorno"/>-->
+  	
+  	<!-- Login con formulario usuario/password -->
+  	<beans:bean id="formAuthenticationEntryPoint" class="com.ke.infra.e9999.security.authentication.CustomLoginEntryPoint">
+  		<beans:property name="urlsExternasProperties" ref="urlsExternasProperties" />
+  		<beans:property name="ajaxLoginError" value="${url.sesionCaducadaDialog}" />
+  		<beans:property name="smartphoneLoginError" value="${url.desconexionInactividad}"/> <!-- solo kutxa -->
+  		<beans:property name="loginFormUrl" value="${url.login}"/> <!-- solo kutxa -->
+	</beans:bean>
+  	  	
+  	<!-- 
+  	Extensión de AuthenticationFailureHandler que se encarga de procesar las peticiones que han fallado a la hora de autenticarse. 
+  	El comportamiento que tendrá este handler es configurable a nivel de entidad y en función del tipo de excepción.-->
+  	<beans:bean id="multiEntidadAuthenticationFailureHandler" class="com.ke.infra.e9999.security.handler.MultiEntidadAuthenticationFailureHandler">
+		<!-- Url a la que se va a redirigir por defecto -->
+		<beans:property name="defaultFailureUrl" value="${url.error}"/>
+		<beans:property name="exceptionMappings">
+			<beans:map>
+				<!-- Si ocurre algún error de sistema, redirect a la página genérica de error-->
+				<beans:entry key="e9999_org.springframework.security.authentication.AuthenticationServiceException" value="${url.error}"/>
+				<!-- Si ocurre algún error al validar las credenciales,redirect a la página de error de login-->
+				<beans:entry key="e9999_org.springframework.security.authentication.BadCredentialsException" value="${url.loginError}"/>
+				<!-- Si ocurre algún error al validar las credenciales en kutxa de escritorio,redirect a la página de login y se pintan los mensajes en la parte de arriba-->
+				<beans:entry key="DESKTOP_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.login}?modo=desktop"/>
+				<!-- Si ocurre algún error al validar las credenciales en kutxa de smartphone, redirect a la página de login y se pintan los mensajes en la parte de arriba-->
+				<beans:entry key="SMARTPHONE_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.login}?modo=smartphone"/>
+				<!-- Si ocurre algún error al validar las credenciales en kutxa de tablet, redirect a la página de login y se pintan los mensajes en la parte de arriba-->
+				<beans:entry key="TABLET_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.login}?modo=tablet"/>
+				<!-- Si ocurre algún error al validar las credenciales en kutxa de kiosko, redirect a la página de login y se pintan los mensajes en la parte de arriba-->
+				<beans:entry key="KIOSKO_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.login}"/>
+			</beans:map>
+		</beans:property>	
+		<!-- 
+		Inyectamos el mensajes operacion service  definido en el applicationContext-web.xml para
+		que la extensión de authenticationFailureHandler de spring security tenga acceso a los mensajes
+		personalizados 
+		-->
+		<beans:property name="mensajesOperacionService" ref="onlineBankaMensajesOperacionService"/>
+  	</beans:bean>
+  	
+  	<!-- FailureHandler que se va a utilizar en el proceso de selección de usuario. -->
+  	<beans:bean id="cambioUsuarioFailureHandler" class="com.ke.infra.e9999.security.handler.MultiEntidadAuthenticationFailureHandler">
+		<!-- Url a la que se va a redirigir por defecto -->
+		<beans:property name="defaultFailureUrl" value="${url.error}"/>
+		<beans:property name="exceptionMappings">
+			<beans:map>
+				<!-- Si ocurre algún error de sistema, redirect a la página genérica de error-->
+				<beans:entry key="e9999_org.springframework.security.authentication.AuthenticationServiceException" value="${url.error}"/>
+				<!-- Si ocurre algún de negocio recuperable al seleccionar el usuario relacionado,redirect a la página de error de login-->
+				<beans:entry key="e9999_org.springframework.security.authentication.BadCredentialsException" value="${url.loginError}"/>
+				<!-- Si ocurre algún error de negocio recuperable al seleccionar el usuario relacionado, redirect a la página de selección de usuario-->
+				<beans:entry key="DESKTOP_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.selUsuario}"/>
+				<!-- Si ocurre algún error de negocio recuperable al seleccionar el usuario relacionado en dispositivos smartphone, redirect a la página de selección de usuario-->
+				<beans:entry key="SMARTPHONE_e2101_org.springframework.security.authentication.BadCredentialsException" value="${url.selUsuario}"/>
+			</beans:map>
+		</beans:property>	
+		<!-- 
+		Inyectamos el mensajes operacion service  definido en el applicationContext-web.xml para
+		que la extensión de authenticationFailureHandler de spring security tenga acceso a los mensajes
+		personalizados 
+		-->
+		<beans:property name="mensajesOperacionService" ref="onlineBankaMensajesOperacionService"/>
+  	</beans:bean>
+  	
+  	<beans:bean id="formAuthenticationFilter" class="com.ke.infra.e9999.security.filters.UsuarioPinAutenticationFilter">
+  		<beans:property name="authenticationManager" ref="authenticationManager"/>
+  		<beans:property name="filterProcessesUrl" value="/kesrv/login/validate_user"/>
+  		<beans:property name="usernameParameter" value="USUARIO"/>
+  		<beans:property name="passwordParameter" value="PIN"/>
+  		<beans:property name="authenticationFailureHandler" ref="multiEntidadAuthenticationFailureHandler"/>
+		<beans:property name="authenticationSuccessHandler" ref="customSuccessHandler"/>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.ke.web.infra.security.authentication.CustomPreAuthenticationDetailsForm"/>
+  			</beans:bean>
+  		</beans:property>
+  		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>  			
+	</beans:bean>
+	
+	<!-- Login con otp -->
+	<beans:bean id="otpAuthenticationFilter" class="com.ke.infra.e9999.security.filters.OtpAutenticationFilter">
+  		<beans:property name="authenticationManager" ref="authenticationManager"/>
+  		<beans:property name="filterProcessesUrl" value="/kesrv/login/validate_user"/>
+  		<beans:property name="usernameParameter" value="USUARIO"/>
+  		<beans:property name="passwordParameter" value="OTP"/>
+  		<beans:property name="authenticationFailureHandler" ref="multiEntidadAuthenticationFailureHandler"/>
+		<beans:property name="authenticationSuccessHandler" ref="customSuccessHandler"/>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="com.ke.web.infra.security.authentication.NiaWebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.ke.web.infra.security.authentication.CustomPreAuthenticationDetailsForm"/>
+  			</beans:bean>
+  		</beans:property>
+  		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>  			
+	</beans:bean>
+	
+  	<!-- Login para la demo -->
+  	<beans:bean id="demoAuthenticationFilter" class="com.ke.web.infra.security.filters.DemoAuthenticationFilter">
+  		<beans:property name="authenticationManager" ref="authenticationManager"/>
+  		<beans:property name="postOnly" value="false"/>
+  		<beans:property name="aplicarSello" value="false"/>
+  		<beans:property name="filterProcessesUrl" value="/kesrv/login/demo"/>
+		<beans:property name="authenticationFailureHandler" ref="multiEntidadAuthenticationFailureHandler"/>
+		<beans:property name="authenticationSuccessHandler" ref="customSuccessHandler"/>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.ke.web.infra.security.authentication.CustomPreAuthenticationDetailsForm"/>
+  			</beans:bean>
+  		</beans:property>
+  		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
+	</beans:bean>
+	
+	
+	<!-- 
+  	<beans:bean id="BMPruebasAuthenticationFilter" class="com.kutxa.be.login.form.FiltroBMPruebas">
+  		<beans:property name="authenticationManager" ref="authenticationManager"/>
+  		<beans:property name="filterProcessesUrl" value="/validate_user_desa"/>
+  		<beans:property name="usernameParameter" value="USUARIO"/>
+  		<beans:property name="passwordParameter" value="PIN"/>
+  		<beans:property name="postOnly" value="false"/>
+  		<beans:property name="authenticationFailureHandler">
+  			<beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+  				<beans:property name="defaultFailureUrl" value="/errorCredenciales.jsp"/>
+  			</beans:bean>
+  		</beans:property>
+  		<beans:property name="authenticationSuccessHandler">
+  			<beans:bean class="com.kutxa.be.login.CustomAuthenticationSuccessHandler"/>
+  		</beans:property>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.kutxa.be.login.form.CustomPreAuthenticationDetailsForm"/>
+  			</beans:bean>
+  		</beans:property>
+	</beans:bean>
+	 -->
+	
+	
+  	<!-- Single Logon -->
+  	<beans:bean id="filtroSingleLogon" class="com.ke.infra.e9999.security.filters.FiltroSingleLogon">
+  		<beans:property name="authenticationManager" ref="authenticationManager"/>
+  		<beans:property name="postOnly" value="false"/> <!-- comentar en producción -->
+  		<beans:property name="authenticationFailureHandler" ref="multiEntidadAuthenticationFailureHandler"/>
+		<beans:property name="authenticationSuccessHandler" ref="customSuccessHandler"/>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.ke.web.infra.security.authentication.CustomPreAuthenticationDetails"/>
+  			</beans:bean>
+  		</beans:property>
+  		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
+  		<beans:property name="filterProcessesUrl" value="${url.login}"/>
+  	</beans:bean>
+  	
+  	<!-- Usuarios múltiples -->
+  	<beans:bean id="filtroCambioUsuario" class="com.ke.web.infra.security.filters.FiltroCambioUsuario">
+  		<beans:property name="usuariosRelacionadosUrl" value="${url.selUsuario}"/>
+  		<beans:property name="seleccionUsuarioUrl" value="/kesrv/login/cambiar_usuario" />
+  		<!--<beans:property name="desconexionUrl" value="/kesrv/desconectar/DesconectarConfirmar.faces" />-->
+  		<beans:property name="usernameParameter" value="USUARIO"/>
+  		<!-- <beans:property name="seleccionarUsuarioFailureUrl" value="${url.error}" /> -->
+  		<beans:property name="successHandler" ref="customSuccessHandler"/>
+  		<beans:property name="failureHandler" ref="cambioUsuarioFailureHandler"/>
+  		<beans:property name="authenticationDetailsSource">
+  			<beans:bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource">
+  				<beans:property name="clazz" value="com.ke.web.infra.security.authentication.CustomPreAuthenticationDetails"/>
+  			</beans:bean>
+  		</beans:property>
+  	</beans:bean>
+  	 	
+  	<!-- Handler que se encarga de hacer la precarga, una vez que el usuario esta autenticado -->
+	<beans:bean id="customSuccessHandler" class="com.ke.web.infra.security.authentication.CustomSuccessHandler">
+		<beans:property name="selUsuarioUrl" value="${url.selUsuario}" />
+		<beans:property name="errorUrl" value="${url.error}" />
+		<beans:property name="precargaService" ref="precargaService"/>
+		<beans:property name="contextoUsuario" ref="contextoUsuario" />
+	</beans:bean>
+  	
+  	<!-- Authentication Providers -->
+  	<authentication-manager alias="authenticationManager">
+  		<!-- 
+    	<authentication-provider>
+      		<user-service>
+        		<user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
+        		<user name="bob" password="bobspassword" authorities="ROLE_USER" />
+      		</user-service>
+    	</authentication-provider>
+    	 -->
+    	<!-- autenticación de tipo usuario/password 
+    		Usado por: Clientes Kutxa, Kutxa Moviles y Banco Madrid Clientes (para pruebas,no usa formulario)
+    	-->
+    	<authentication-provider ref="loginAuthenticationProvider" />
+    	<!-- autenticación de tipo usuario/token -->
+    	<authentication-provider ref="otpAuthenticationProvider" />
+    	<!-- autenticación single logon
+    		Usado por: Banco Madrid Clientes
+    	 -->
+    	<authentication-provider ref="singleLogonAuthenticationProvider" />
+  	</authentication-manager>
+  	
+  	<!-- ORIGINAL beans:bean id="loginAuthenticationProvider" class="com.ke.web.infra.security.providers.LoginAuthenticationProvider"/ -->
+  	<beans:bean id="loginAuthenticationProvider" class="ccom.eej.security.provider.WebServiceAuthenticationProvider">
+  		<beans:property name="userTypeRoleMap">
+  			<beans:map>
+  				<beans:entry key="gestor">	
+  					<beans:list>
+  						<beans:value>ROLE_GESTOR</beans:value>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_ADMIN</beans:value>
+  						<beans:value>ROLE_REVISOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="administrador">	
+  					<beans:list>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_ADMIN</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="revisor">	
+  					<beans:list>
+  						<beans:value>ROLE_EMP</beans:value>
+  						<beans:value>ROLE_REVISOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  				<beans:entry key="proveedor">	
+  					<beans:list>
+  						<beans:value>ROLE_PROVEEDOR</beans:value>
+  					</beans:list>
+  				</beans:entry>
+  			</beans:map>
+  		
+  		
+  		</beans:property>
+  	</beans:bean>
+  	
+  	
+  	
+  	<beans:bean id="singleLogonAuthenticationProvider" class="com.ke.web.infra.security.providers.SingleLogonAuthenticationProvider"/>
+  	<beans:bean id="otpAuthenticationProvider" class="com.ke.web.infra.security.providers.OtpAuthenticationProvider"/>
+  	
+  	
+	<!-- Service encargado de hacer la precarga -->
+	<beans:bean id="precargaService" class="com.ke.web.infra.services.PrecargaServiceProcletsImpl"/>
+	
+	<!-- Atributos de sesión que se guardan una vez hecho el login -->
+	<beans:bean id="sessionAuthenticationStrategy" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+		<beans:property name="migrateSessionAttributes" value="false"/>
+		<!-- Atributos que se copian a la nueva sesión -->
+		<beans:property name="retainedAttributes">
+			<beans:list>
+		        <beans:bean id="com.ke.infra.e9999.security.filters.CustomUsernamePasswordAuthenticationFilter.SELLO_SAVED_SESSION_KEY" 
+   								class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+		        <beans:value>pinpad</beans:value>
+	        	<beans:bean id="org.springframework.security.web.savedrequest.DefaultSavedRequest.SPRING_SECURITY_SAVED_REQUEST_KEY" 
+   								class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+				<beans:value>s_entidad</beans:value>
+				<beans:value>s_idioma</beans:value>
+				<beans:value>movil</beans:value>
+				<beans:value>tipo_movil</beans:value>
+				<beans:value>s_nojs</beans:value>
+				<beans:value>temp_redireccion</beans:value>
+				<beans:value>temp_tipouser</beans:value>
+				<beans:value>csbdatos</beans:value>
+				<beans:value>cambioIdiomaViewBean</beans:value>
+				<beans:value>s_tokenmovil</beans:value>
+				<beans:bean id="com.ke.infra.e9999.filter.DeteccionModoFilter.MEDIO_SESSION_PARAM" 
+   								class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+				<beans:bean id="com.ke.infra.e9999.contextos.impl.ContextoInfraestructuraImpl.TIPO_DISPOSITIVO_KEY" 
+   								class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+		    </beans:list>
+		</beans:property>
+  	</beans:bean>
+</beans:beans>

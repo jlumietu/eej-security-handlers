@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/229/trunk/eej-security-handlers/src/main/resources
+END
+applicationContext-SpringSecurity2.xml
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/240/trunk/eej-security-handlers/src/main/resources/applicationContext-SpringSecurity2.xml
+END
+applicationContext-SpringSecurity.xml
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/240/trunk/eej-security-handlers/src/main/resources/applicationContext-SpringSecurity.xml
+END

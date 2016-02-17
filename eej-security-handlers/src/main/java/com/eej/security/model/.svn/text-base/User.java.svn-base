@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package com.eej.security.model;
+
+/**
+ * @author DOIBALMI
+ *
+ */
+public interface User {
+
+	String getId();
+
+}
