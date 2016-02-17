@@ -6,7 +6,7 @@ package com.eej.security.service.model;
 import java.io.Serializable;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface TokenValidationRequest extends Serializable{

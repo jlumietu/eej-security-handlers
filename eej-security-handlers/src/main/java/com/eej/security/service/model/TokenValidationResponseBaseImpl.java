@@ -4,7 +4,7 @@
 package com.eej.security.service.model;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class TokenValidationResponseBaseImpl implements TokenValidationResponse{

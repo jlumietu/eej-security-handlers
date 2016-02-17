@@ -4,7 +4,7 @@
 package com.eej.security.model;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface SessionDetails {

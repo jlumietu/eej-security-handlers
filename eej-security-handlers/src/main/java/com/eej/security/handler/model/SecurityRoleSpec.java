@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * 
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface SecurityRoleSpec extends GrantedAuthority{

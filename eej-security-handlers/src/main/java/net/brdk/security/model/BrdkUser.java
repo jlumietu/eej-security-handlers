@@ -6,7 +6,7 @@ package net.brdk.security.model;
 import com.eej.security.model.User;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface BrdkUser extends User {

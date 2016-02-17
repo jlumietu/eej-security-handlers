@@ -6,7 +6,7 @@ package com.eej.security.service;
 import com.eej.security.model.GroupInfo;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public interface GroupInfoDetailsService {

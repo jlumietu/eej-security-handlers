@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class UserDetailsAuthenticationException extends

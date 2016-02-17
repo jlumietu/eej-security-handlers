@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public interface GroupInfo extends Serializable{

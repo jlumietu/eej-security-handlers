@@ -22,7 +22,7 @@ import com.eej.security.service.model.TokenValidationRequestBaseImpl;
 import com.eej.security.service.model.TokenValidationResponse;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class TokenAuthenticationProvider implements AuthenticationProvider {

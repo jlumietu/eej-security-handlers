@@ -6,7 +6,7 @@ package com.eej.security.filters;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public class OtroUsernamePasswordAuthenticationFilter extends

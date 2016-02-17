@@ -19,7 +19,7 @@ import com.eej.security.handler.model.MyGrantedAuthority;
 import com.eej.security.handler.model.WebServiceAuthenticationUser;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class WebServiceAuthenticationProvider implements AuthenticationProvider {

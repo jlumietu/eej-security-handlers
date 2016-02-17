@@ -7,7 +7,7 @@ import com.eej.security.handler.model.SecurityHandlerExceptionResolverFactory;
 
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface CustomSecurityExceptionBasedHandler {

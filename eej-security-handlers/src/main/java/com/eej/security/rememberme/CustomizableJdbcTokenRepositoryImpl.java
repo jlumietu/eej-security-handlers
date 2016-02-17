@@ -6,7 +6,7 @@ package com.eej.security.rememberme;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class CustomizableJdbcTokenRepositoryImpl extends

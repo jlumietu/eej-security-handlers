@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public interface LastLoginInformation extends Serializable {

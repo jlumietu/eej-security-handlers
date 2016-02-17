@@ -46,7 +46,7 @@ import com.eej.security.service.principal.PrincipalBuilder;
  * 
  * Es cierto que 
  * 
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 @Deprecated

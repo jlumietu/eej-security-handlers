@@ -9,7 +9,7 @@ import com.eej.security.ApplicationVersion;
 import com.eej.security.handler.model.SecurityRoleSpec;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class UnsupportedSecurityRoleSpecException extends

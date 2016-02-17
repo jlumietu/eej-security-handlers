@@ -9,7 +9,7 @@ import com.eej.security.handler.ApplicationVersion;
 
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class SecurityHandlerExceptionResolverFactory implements Serializable{

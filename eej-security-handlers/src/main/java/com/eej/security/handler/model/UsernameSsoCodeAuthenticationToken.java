@@ -9,7 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class UsernameSsoCodeAuthenticationToken extends

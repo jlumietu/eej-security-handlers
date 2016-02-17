@@ -8,7 +8,7 @@ import java.io.Serializable;
 import com.eej.security.handler.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class WebServiceAuthenticationUser implements Serializable {

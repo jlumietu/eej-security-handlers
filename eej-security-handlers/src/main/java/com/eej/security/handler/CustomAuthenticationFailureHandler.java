@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public class CustomAuthenticationFailureHandler extends

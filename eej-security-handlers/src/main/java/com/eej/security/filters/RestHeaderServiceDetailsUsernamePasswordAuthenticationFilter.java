@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class RestHeaderServiceDetailsUsernamePasswordAuthenticationFilter

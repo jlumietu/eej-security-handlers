@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public interface AuthenticationDetailsGenerator {

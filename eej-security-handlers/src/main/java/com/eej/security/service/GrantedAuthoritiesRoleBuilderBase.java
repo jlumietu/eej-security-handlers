@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.eej.security.handler.model.SecurityRoleSpec;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public abstract class GrantedAuthoritiesRoleBuilderBase implements

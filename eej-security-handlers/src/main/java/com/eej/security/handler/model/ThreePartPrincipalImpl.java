@@ -8,7 +8,7 @@ import java.io.Serializable;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class ThreePartPrincipalImpl implements ThreePartPrincipal, Serializable {

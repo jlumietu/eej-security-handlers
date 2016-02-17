@@ -8,7 +8,7 @@ import org.springframework.security.core.AuthenticationException;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class BaseAuthenticationException extends AuthenticationException {

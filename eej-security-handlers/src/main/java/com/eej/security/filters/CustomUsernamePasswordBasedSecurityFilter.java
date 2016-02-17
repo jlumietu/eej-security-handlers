@@ -26,7 +26,7 @@ import org.springframework.util.StringUtils;
 /**
  * Basada totalmente en UserNamePasswordAuthenticationFilter para exluir la 
  * clase GenericFilterBean como superclase de AbstractAuthenticationProcessingFilter  
- * @author doibalmi
+ * @author jlumietu
  * 
  * Processes an authentication form submission. Called
  * {@code AuthenticationProcessingFilter} prior to Spring Security 3.0.

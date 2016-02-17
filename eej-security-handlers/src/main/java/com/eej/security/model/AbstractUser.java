@@ -6,7 +6,7 @@ package com.eej.security.model;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public abstract class AbstractUser implements User{

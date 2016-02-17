@@ -6,7 +6,7 @@ package com.eej.security.handler.model;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class MyGrantedAuthority implements GrantedAuthority {

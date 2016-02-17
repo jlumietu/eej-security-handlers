@@ -47,7 +47,7 @@ import org.springframework.util.Assert;
  * url de entrada
  * 
  *  
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public abstract class BaseSecurityFilter implements Filter {

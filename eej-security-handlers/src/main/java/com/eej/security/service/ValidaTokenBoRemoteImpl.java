@@ -7,7 +7,7 @@ import com.eej.security.service.model.TokenValidationRequest;
 import com.eej.security.service.model.TokenValidationResponse;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class ValidaTokenBoRemoteImpl implements ValidaTokenBo {

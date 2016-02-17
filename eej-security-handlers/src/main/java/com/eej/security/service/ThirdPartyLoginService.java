@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public interface ThirdPartyLoginService{

@@ -9,7 +9,7 @@ import java.util.List;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class SecurityAuthorizationResponse implements Serializable {

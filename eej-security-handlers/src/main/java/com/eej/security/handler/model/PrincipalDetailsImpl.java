@@ -12,7 +12,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class PrincipalDetailsImpl extends ThreePartPrincipalImpl implements Serializable, PrincipalDetails{

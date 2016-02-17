@@ -20,7 +20,7 @@ import com.eej.security.handler.model.PrincipalDetails;
 import com.eej.security.handler.model.UserDetailsBasedAuthentication;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public class PrincipalModifierAuthenticationSuccessHandler extends 

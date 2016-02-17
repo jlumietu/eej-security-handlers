@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.eej.security.handler.model.PrincipalDetails;
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public class UserDetailsServiceBasedAuthenticationProvider extends

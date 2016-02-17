@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.eej.security.handler.model.PrincipalDetails;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class PrincipalDetailsBasedBuilder implements PrincipalBuilder {

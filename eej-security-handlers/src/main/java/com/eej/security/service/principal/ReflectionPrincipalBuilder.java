@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
- * @author doibalmi
+ * @author jlumietu
  *
  */
 public class ReflectionPrincipalBuilder implements PrincipalBuilder{

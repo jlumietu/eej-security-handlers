@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.eej.security.handler.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu
  *
  */
 public class RemotelyGrantedAuthority implements GrantedAuthority {
