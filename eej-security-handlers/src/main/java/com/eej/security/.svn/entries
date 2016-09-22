@@ -1,49 +1,0 @@
-10
-
-dir
-234
-https://my-first-eej-demo.googlecode.com/svn/trunk/eej-security-handlers/src/main/java/com/eej/security
-https://my-first-eej-demo.googlecode.com/svn
-
-
-
-2014-10-28T01:05:20.642834Z
-229
-jlumietu@gmail.com
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-465c6ec6-8ad8-c73f-d80f-0fbc7dff1460
-
-exception
-dir
-
-filters
-dir
-
-handler
-dir
-
-model
-dir
-
-provider
-dir
-
-service
-dir
-
-source
-dir
-
