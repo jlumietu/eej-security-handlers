@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.eej.security.handlers</groupId>
   <artifactId>eej-security-handlers</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.8-SNAPSHOT</version>
   <name>eej-security-handlers</name>
   <properties>
 	<java-version>1.6</java-version>
