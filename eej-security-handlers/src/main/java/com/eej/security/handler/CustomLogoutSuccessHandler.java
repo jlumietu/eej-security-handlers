@@ -35,7 +35,7 @@ public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 			throws IOException, ServletException {
 		logger.debug(this.getClass().getSimpleName() + ".onLogoutSuccess");
 		
-		for(Enumeration en = request.getHeaderNames(); en.hasMoreElements();){
+		for(Enumeration<?> en = request.getHeaderNames(); en.hasMoreElements();){
 			String header = (String)en.nextElement(); 
 			logger.debug(header + " = " + request.getHeader(header));
 		}

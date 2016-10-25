@@ -13,7 +13,7 @@ public interface User extends Serializable{
 	
 	String getName();
 
-	int getId();
+	Serializable getId();
 	
 	String getEmail();
 	

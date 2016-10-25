@@ -1,0 +1,23 @@
+package com.eej.security.handler.model;
+
+import java.io.Serializable;
+
+/**
+ * Any UserDetails, User or Principal implementation often have a field which acts as 
+ * a key field from a User Repository.
+ * 
+ * For example, a User Database allways have one or more fields declared as primary key
+ * or unique which could be used to map this data base entity to another tables or entities.
+ * 
+ * This interface pretends to be a accomplishing contract to all this kind of UserDetails, 
+ * User or Principal implementations which are loaded in Security Context during authentication
+ * stage, to make possible then to relate this with any other action.  
+ * 
+ * @author DOIBALMI
+ *
+ */
+public interface UserRepositorySerializableId extends Serializable{
+
+	public abstract Serializable getId();
+
+}

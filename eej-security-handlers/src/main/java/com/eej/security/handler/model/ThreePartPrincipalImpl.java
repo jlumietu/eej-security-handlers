@@ -55,7 +55,7 @@ public class ThreePartPrincipalImpl implements ThreePartPrincipal, Serializable 
 	 * @see com.eej.security.handler.model.ThreePartPrincipal#getId()
 	 */
 	@Override
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 

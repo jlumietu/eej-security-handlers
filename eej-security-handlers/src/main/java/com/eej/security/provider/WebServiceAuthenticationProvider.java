@@ -100,7 +100,8 @@ public class WebServiceAuthenticationProvider implements AuthenticationProvider 
 			throws AuthenticationException {
 		UsernamePasswordAuthenticationToken preAuthToken = (UsernamePasswordAuthenticationToken) authentication;
 		String usuario = preAuthToken.getPrincipal().toString();
-		String password = preAuthToken.getCredentials().toString();
+		// TODO
+		// String password = preAuthToken.getCredentials().toString(); 
 		
 		WebServiceAuthenticationUser user = this.validaUsuario();
 		/*

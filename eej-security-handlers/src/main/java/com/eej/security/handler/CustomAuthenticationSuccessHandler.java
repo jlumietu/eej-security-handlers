@@ -47,7 +47,7 @@ public class CustomAuthenticationSuccessHandler extends
 
 		logger.debug("AdmcpAuthenticationSuccessHandler.onAuthenticationSuccess");
 		
-		for(Enumeration en = request.getHeaderNames(); en.hasMoreElements();){
+		for(Enumeration<?> en = request.getHeaderNames(); en.hasMoreElements();){
 			String header = (String)en.nextElement(); 
 			logger.debug(header + " = " + request.getHeader(header));
 		}

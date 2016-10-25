@@ -3,11 +3,9 @@
  */
 package com.eej.security.provider;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -44,7 +42,7 @@ import com.eej.security.service.principal.PrincipalBuilder;
  * Si simplemente tenemos que enviar el userName, es mucha mejor aproximación crear un nuevo
  * UserDetailsService y listo.
  * 
- * Es cierto que 
+ * Es cierto que ...
  * 
  * @author jlumietu
  *

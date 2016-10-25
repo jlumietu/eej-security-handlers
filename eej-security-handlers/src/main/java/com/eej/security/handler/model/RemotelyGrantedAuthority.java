@@ -5,7 +5,7 @@ package com.eej.security.handler.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import com.eej.security.handler.ApplicationVersion;
+import com.eej.security.ApplicationVersion;
 
 /**
  * @author jlumietu

@@ -51,7 +51,7 @@ public class CustomAuthenticationSuccessHandler implements
 	        String contextPath = request.getContextPath();
 	        String servletPath = request.getServletPath();
 	        
-	        Map parametros = request.getParameterMap();
+	        Map<?, ?> parametros = request.getParameterMap();
 	        
 	        logger.debug("contextPath " + contextPath);
             logger.debug("servletPath " + servletPath);
@@ -79,9 +79,10 @@ public class CustomAuthenticationSuccessHandler implements
 	        	servletPath = servletPath.concat("?lang=" +usuarioConectado.getIdioma());
 	        }
 	        if (parametros!=null && !parametros.isEmpty()) {
-	        	Iterator it = parametros.entrySet().iterator();
+	        	Iterator<?> it = parametros.entrySet().iterator();
 	        	while (it.hasNext()) {
-	        		Map.Entry e = (Map.Entry)it.next();
+	        		@SuppressWarnings("rawtypes")
+					Map.Entry e = (Map.Entry)it.next();
 	        		if (!e.getKey().equals("idUsuario") && !e.getKey().equals("token")){
 	        			String[] valor = (String[]) e.getValue();
 	        			String strValor ="";

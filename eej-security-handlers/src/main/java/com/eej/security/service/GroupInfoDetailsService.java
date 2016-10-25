@@ -3,6 +3,8 @@
  */
 package com.eej.security.service;
 
+import java.io.Serializable;
+
 import com.eej.security.model.GroupInfo;
 
 /**
@@ -11,8 +13,8 @@ import com.eej.security.model.GroupInfo;
  */
 public interface GroupInfoDetailsService {
 	
-	public GroupInfo getGroupInfo(int groupId);
+	public GroupInfo getGroupInfo(Serializable groupId);
 	
-	public GroupInfo getUserGroupInfo(int userId);
+	public GroupInfo getUserGroupInfo(Serializable userId);
 
 }

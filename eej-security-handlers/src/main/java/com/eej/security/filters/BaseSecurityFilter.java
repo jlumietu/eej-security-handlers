@@ -42,7 +42,7 @@ import org.springframework.util.Assert;
  * Clase abstracta base para implementar los distintos filtros de seguridad de la aplicación.
  * 
  * Esta basada totalmente en {@link org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter},
- * pero no la extiende porque esa clase está orientada (por el constructor) a ejecutar una url 
+ * pero no la extiende porque esa clase esta orientada (por el constructor) a ejecutar una url 
  * como destino o entrada, mientras que nuestro filtro queremos que procese cualquier url como 
  * url de entrada
  * 

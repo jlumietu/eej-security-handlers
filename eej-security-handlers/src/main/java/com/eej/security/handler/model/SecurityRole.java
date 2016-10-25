@@ -5,7 +5,7 @@ package com.eej.security.handler.model;
 
 import java.io.Serializable;
 
-import com.eej.security.handler.ApplicationVersion;
+import com.eej.security.ApplicationVersion;
 
 /**
  * @author Mikel

@@ -5,13 +5,20 @@ package net.brdk.security.handler.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.eej.security.ApplicationVersion;
+
 /**
  * @author DOMESANU
  *
  */
 public class MyGrantedAuthority implements GrantedAuthority {
 
-	String authority;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = ApplicationVersion.APP_VERSION;
+	
+	private String authority;
 	
 	
 	

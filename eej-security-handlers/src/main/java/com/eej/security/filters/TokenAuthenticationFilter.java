@@ -130,8 +130,7 @@ public class TokenAuthenticationFilter implements Filter {
             String token = params.get("token")[0];
             String idUsuario = params.get("idUsuario")[0];
             if (token != null) {
-            	SecurityContext context = SecurityContextHolder.getContext();
-                Authentication auth = new UsernameSsoCodeAuthenticationToken(idUsuario, token);
+            	Authentication auth = new UsernameSsoCodeAuthenticationToken(idUsuario, token);
                // logger.debug("fin autenticar");
                 return auth;                
             } else {

@@ -3,6 +3,8 @@
  */
 package com.eej.security.model;
 
+import java.io.Serializable;
+
 import com.eej.security.ApplicationVersion;
 
 /**
@@ -17,7 +19,7 @@ public abstract class AbstractUser implements User{
 	private static final long serialVersionUID = ApplicationVersion.APP_VERSION;
 	
 	private String name;
-	private int id;
+	private Serializable id;
 	private String email;
 	private LastLoginInformation lastLoginInformation;
 	private GroupInfo groupInfo;
@@ -34,7 +36,7 @@ public abstract class AbstractUser implements User{
 	 * @see com.eej.security.model.User#getId()
 	 */
 	@Override
-	public int getId() {
+	public Serializable getId() {
 		return this.id;
 	}
 

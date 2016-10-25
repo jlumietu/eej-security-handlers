@@ -3,7 +3,6 @@
  */
 package com.eej.security.handler.model;
 
-import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
