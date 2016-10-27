@@ -31,6 +31,7 @@ public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher 
 	 */
 	@Override
 	public void publishEvent(ApplicationEvent event) {
+		logger.debug("publishEvent(" + event.getClass().getName() + " from " + event.getSource());
 		if(event instanceof InteractiveAuthenticationSuccessEvent){
 			logger.info("Successfull authentication performed for principal+ " + 
 					((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getName());
