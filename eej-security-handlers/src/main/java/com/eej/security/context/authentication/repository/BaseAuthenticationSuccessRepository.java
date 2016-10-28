@@ -11,7 +11,7 @@ import com.eej.security.handler.model.UserRepositorySerializableId;
  * @author DOIBALMI
  *
  */
-public class BaseAuthenticationSuccessEventRepository implements AuthenticationSuccessEventRepository {
+public class BaseAuthenticationSuccessRepository implements AuthenticationSuccessRepository {
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 
@@ -19,7 +19,7 @@ public class BaseAuthenticationSuccessEventRepository implements AuthenticationS
 	 * @see com.eej.security.context.authentication.repository.AuthenticationSuccessEventRepository#publishEvent(com.eej.security.handler.model.UserRepositorySerializableId)
 	 */
 	@Override
-	public void publishEvent(UserRepositorySerializableId userSerializableId) {
+	public void process(UserRepositorySerializableId userSerializableId) {
 		if(logger.isDebugEnabled()){
 			StringBuilder sb = new StringBuilder(userSerializableId.getClass().getName());
 			sb.append(" with id ");

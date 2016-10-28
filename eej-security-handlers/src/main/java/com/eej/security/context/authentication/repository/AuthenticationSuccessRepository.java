@@ -9,8 +9,8 @@ import com.eej.security.handler.model.UserRepositorySerializableId;
  * @author DOIBALMI
  *
  */
-public interface AuthenticationSuccessEventRepository {
+public interface AuthenticationSuccessRepository {
 	
-	public abstract void publishEvent(UserRepositorySerializableId userSerializableId);
+	public abstract void process(UserRepositorySerializableId userSerializableId);
 
 }

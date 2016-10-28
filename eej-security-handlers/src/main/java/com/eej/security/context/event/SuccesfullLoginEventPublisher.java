@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 
-import com.eej.security.context.authentication.repository.AuthenticationSuccessEventRepository;
-import com.eej.security.context.authentication.repository.BaseAuthenticationSuccessEventRepository;
+import com.eej.security.context.authentication.repository.AuthenticationSuccessRepository;
+import com.eej.security.context.authentication.repository.BaseAuthenticationSuccessRepository;
 import com.eej.security.context.helper.BaseUserRepositorySerializableIdLocator;
 import com.eej.security.context.helper.UserRepositorySerializableIdLocator;
 import com.eej.security.handler.model.UserRepositorySerializableId;
@@ -24,7 +24,7 @@ public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher 
 	
 	private UserRepositorySerializableIdLocator userIdLocator = new BaseUserRepositorySerializableIdLocator();
 	
-	private AuthenticationSuccessEventRepository repository = new BaseAuthenticationSuccessEventRepository();
+	private AuthenticationSuccessRepository repository = new BaseAuthenticationSuccessRepository();
 
 	/* (non-Javadoc)
 	 * @see org.springframework.context.ApplicationEventPublisher#publishEvent(org.springframework.context.ApplicationEvent)
@@ -48,7 +48,7 @@ public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher 
 	@Override
 	public void publishEvent(Object object) {
 		if(object != null && object instanceof UserRepositorySerializableId){
-			repository.publishEvent((UserRepositorySerializableId)object);
+			repository.process((UserRepositorySerializableId)object);
 		}
 
 	}

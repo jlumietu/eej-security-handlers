@@ -3,8 +3,11 @@
  */
 package com.eej.security.filters;
 
+import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -98,11 +101,6 @@ public class DetailsUsernamePasswordAuthenticationFilter extends UsernamePasswor
 	}
 
 
-
-
-
-
-
 	/**
 	 * @return the defaultAuthenticationDetails
 	 */
@@ -132,4 +130,14 @@ public class DetailsUsernamePasswordAuthenticationFilter extends UsernamePasswor
 			Map<Class<?>, AuthenticationDetailsGenerator> authenticationDetailsMapper) {
 		this.authenticationDetailsMapper = authenticationDetailsMapper;
 	}
+
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		logger.info("successfullAuthenticationCalled, delegating to super-superclass");
+		logger.info("super.eventPublisher is null? " +  (super.eventPublisher == null?"yes, is null":"no " + super.eventPublisher.getClass().getName()));
+		super.successfulAuthentication(request, response, chain, authResult);
+	}
+	
+	
 }
