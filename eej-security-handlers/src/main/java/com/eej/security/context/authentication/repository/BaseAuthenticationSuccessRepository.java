@@ -5,7 +5,7 @@ package com.eej.security.context.authentication.repository;
 
 import org.apache.log4j.Logger;
 
-import com.eej.security.handler.model.UserRepositorySerializableId;
+import com.erax.principal.PrincipalSerializableId;
 
 /**
  * @author DOIBALMI
@@ -19,7 +19,7 @@ public class BaseAuthenticationSuccessRepository implements AuthenticationSucces
 	 * @see com.eej.security.context.authentication.repository.AuthenticationSuccessEventRepository#publishEvent(com.eej.security.handler.model.UserRepositorySerializableId)
 	 */
 	@Override
-	public void process(UserRepositorySerializableId userSerializableId) {
+	public void process(PrincipalSerializableId userSerializableId) {
 		if(logger.isDebugEnabled()){
 			StringBuilder sb = new StringBuilder(userSerializableId.getClass().getName());
 			sb.append(" with id ");

@@ -7,8 +7,11 @@ import java.lang.reflect.Field;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.eej.security.handler.model.UserRepositorySerializableId;
+import com.erax.principal.PrincipalSerializableId;
 
 /**
  * Tries to find any UserRepositorySerializableId instance object in some locations inside the Authentication
@@ -25,8 +28,8 @@ public class BaseUserRepositorySerializableIdLocator implements UserRepositorySe
 	 * @see com.eej.security.context.helper.UserRepositorySerializableIdLocator#find(org.springframework.security.core.Authentication)
 	 */
 	@Override
-	public UserRepositorySerializableId find(Authentication authentication) {
-		UserRepositorySerializableId result = null;
+	public PrincipalSerializableId find(Authentication authentication) {
+		PrincipalSerializableId result = null;
 		result = this.searchInPrincipal(authentication);
 		if(result != null){
 			return result;
@@ -40,10 +43,13 @@ public class BaseUserRepositorySerializableIdLocator implements UserRepositorySe
 	 * @param authentication
 	 * @return
 	 */
-	private UserRepositorySerializableId searchInDetails(Authentication authentication) {
+	private PrincipalSerializableId searchInDetails(Authentication authentication) {
 		Object principal = authentication.getDetails();
-		UserRepositorySerializableId result = null;
+		PrincipalSerializableId result = null;
 		result = this.searchInObject(principal);
+		logger.debug("looking for PrincipalSerializableId in details, success? " + 
+				(result!=null?result.getClass().getName() + " = " + result.getId():"not found")
+				);
 		return result;
 	}
 
@@ -52,23 +58,31 @@ public class BaseUserRepositorySerializableIdLocator implements UserRepositorySe
 	 * @param authentication
 	 * @return
 	 */
-	private UserRepositorySerializableId searchInPrincipal(Authentication authentication) {
+	private PrincipalSerializableId searchInPrincipal(Authentication authentication) {
 		Object principal = authentication.getPrincipal();
-		UserRepositorySerializableId result = null;
+		PrincipalSerializableId result = null;
 		result = this.searchInObject(principal);
+		logger.debug("looking for PrincipalSerializableId in principal, success? " + 
+				(result!=null?result.getClass().getName() + " = " + result.getId():"not found")
+				);
 		return result;
 	}
 
-	protected UserRepositorySerializableId searchInObject(Object object) {
+	/**
+	 * 
+	 * @param object
+	 * @return
+	 */
+	protected PrincipalSerializableId searchInObject(Object object) {
 		if(object instanceof UserRepositorySerializableId){
-			return (UserRepositorySerializableId)object;
+			return (PrincipalSerializableId)object;
 		}
 		Class<? extends Object> clazz = object.getClass();
 		for(Field f: clazz.getDeclaredFields()){
 			f.setAccessible(true);
 			if(UserRepositorySerializableId.class.isAssignableFrom(f.getType())){
 				try {
-					return (UserRepositorySerializableId)f.get(object);
+					return (PrincipalSerializableId)f.get(object);
 				} catch (IllegalArgumentException e) {
 					logger.warn("Error accesing " + object.getClass().getName() 
 								+ " field " + f.getName() + " = " + e.getMessage(), e);
@@ -79,6 +93,12 @@ public class BaseUserRepositorySerializableIdLocator implements UserRepositorySe
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public PrincipalSerializableId findPrincipalSerializableId() {
+		SecurityContext sc = SecurityContextHolder.getContext();
+		return this.find(sc.getAuthentication());
 	}
 
 }

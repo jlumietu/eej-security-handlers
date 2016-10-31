@@ -13,6 +13,7 @@ import com.eej.security.context.authentication.repository.BaseAuthenticationSucc
 import com.eej.security.context.helper.BaseUserRepositorySerializableIdLocator;
 import com.eej.security.context.helper.UserRepositorySerializableIdLocator;
 import com.eej.security.handler.model.UserRepositorySerializableId;
+import com.erax.principal.PrincipalSerializableId;
 
 /**
  * @author DOIBALMI
@@ -35,7 +36,7 @@ public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher 
 		if(event instanceof InteractiveAuthenticationSuccessEvent){
 			logger.info("Successfull authentication performed for principal+ " + 
 					((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getName());
-			UserRepositorySerializableId id = 
+			PrincipalSerializableId id = 
 					userIdLocator.find(((InteractiveAuthenticationSuccessEvent) event).getAuthentication());
 			this.publishEvent(id);
 		}
@@ -48,7 +49,7 @@ public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher 
 	@Override
 	public void publishEvent(Object object) {
 		if(object != null && object instanceof UserRepositorySerializableId){
-			repository.process((UserRepositorySerializableId)object);
+			repository.process((PrincipalSerializableId)object);
 		}
 
 	}

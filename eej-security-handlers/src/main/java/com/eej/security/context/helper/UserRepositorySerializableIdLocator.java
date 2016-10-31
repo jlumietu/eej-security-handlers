@@ -5,14 +5,15 @@ package com.eej.security.context.helper;
 
 import org.springframework.security.core.Authentication;
 
-import com.eej.security.handler.model.UserRepositorySerializableId;
+import com.erax.principal.PrincipalSerializableId;
+import com.erax.principal.PrincipalSerializableIdLocator;
 
 /**
  * @author DOIBALMI
  *
  */
-public interface UserRepositorySerializableIdLocator {
+public interface UserRepositorySerializableIdLocator extends PrincipalSerializableIdLocator {
 	
-	public abstract UserRepositorySerializableId find(Authentication authentication);
+	public abstract PrincipalSerializableId find(Authentication authentication);
 
 }

@@ -11,7 +11,8 @@ import com.eej.security.context.authentication.repository.AuthenticationSuccessR
 import com.eej.security.context.authentication.repository.BaseAuthenticationSuccessRepository;
 import com.eej.security.context.helper.BaseUserRepositorySerializableIdLocator;
 import com.eej.security.context.helper.UserRepositorySerializableIdLocator;
-import com.eej.security.handler.model.UserRepositorySerializableId;
+import com.erax.principal.PrincipalSerializableId;
+import com.erax.principal.PrincipalSerializableIdLocator;
 
 /**
  * @author DOIBALMI
@@ -29,13 +30,13 @@ public class SuccessfullAuthenticationEventListener implements ApplicationListen
 	public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
 		logger.info("Successfull authentication performed for principal+ " + 
 				((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getName());
-		UserRepositorySerializableId id = 
+		PrincipalSerializableId id = 
 				userIdLocator.find(((InteractiveAuthenticationSuccessEvent) event).getAuthentication());
 		logger.debug("UserRepositorySerializableId found? " + (id==null?"null, not found":id.getClass().getName() + " = " + id.getId()));
 		repository.process(id);		
 	}
 
-	public UserRepositorySerializableIdLocator getUserIdLocator() {
+	public PrincipalSerializableIdLocator getUserIdLocator() {
 		return userIdLocator;
 	}
 

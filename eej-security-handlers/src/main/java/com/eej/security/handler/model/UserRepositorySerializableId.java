@@ -2,6 +2,8 @@ package com.eej.security.handler.model;
 
 import java.io.Serializable;
 
+import com.erax.principal.PrincipalSerializableId;
+
 /**
  * Any UserDetails, User or Principal implementation often have a field which acts as 
  * a key field from a User Repository.
@@ -16,8 +18,6 @@ import java.io.Serializable;
  * @author DOIBALMI
  *
  */
-public interface UserRepositorySerializableId extends Serializable{
-
-	public abstract Serializable getId();
+public interface UserRepositorySerializableId extends Serializable, PrincipalSerializableId{
 
 }
