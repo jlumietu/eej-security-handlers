@@ -4,7 +4,7 @@
 package com.eej.security.service.model;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class TokenValidationRequestBaseImpl implements TokenValidationRequest {

@@ -8,7 +8,7 @@ import com.eej.security.service.model.TokenValidationResponse;
 import com.eej.security.service.model.TokenValidationResponseBaseImpl;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class ValidaTokenBoMockImpl implements ValidaTokenBo {

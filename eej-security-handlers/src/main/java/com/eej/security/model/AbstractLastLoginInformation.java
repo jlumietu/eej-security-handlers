@@ -8,7 +8,7 @@ import java.util.Date;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public abstract class AbstractLastLoginInformation implements LastLoginInformation {

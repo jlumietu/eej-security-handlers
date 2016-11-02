@@ -47,7 +47,7 @@ import org.springframework.util.Assert;
  * url de entrada
  * 
  *  
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public abstract class BaseSecurityFilter implements Filter {

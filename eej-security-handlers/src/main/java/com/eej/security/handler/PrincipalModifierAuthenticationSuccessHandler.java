@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class PrincipalModifierAuthenticationSuccessHandler extends 

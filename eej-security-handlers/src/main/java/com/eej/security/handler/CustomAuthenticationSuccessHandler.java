@@ -25,7 +25,7 @@ import com.eej.security.handler.model.SecurityHandlerExceptionResolverFactory;
 
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class CustomAuthenticationSuccessHandler extends

@@ -4,7 +4,7 @@
 package com.eej.security;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public abstract class ApplicationVersion {

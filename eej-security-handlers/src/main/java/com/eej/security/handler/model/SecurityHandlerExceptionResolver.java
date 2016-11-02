@@ -10,7 +10,7 @@ import com.eej.security.ApplicationVersion;
 
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class SecurityHandlerExceptionResolver implements Serializable{

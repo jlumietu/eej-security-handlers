@@ -44,7 +44,7 @@ import com.eej.security.service.principal.PrincipalBuilder;
  * 
  * Es cierto que ...
  * 
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 @Deprecated

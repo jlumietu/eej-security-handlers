@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 /**
  * Basada totalmente en UserNamePasswordAuthenticationFilter para exluir la 
  * clase GenericFilterBean como superclase de AbstractAuthenticationProcessingFilter  
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  * 
  * Processes an authentication form submission. Called
  * {@code AuthenticationProcessingFilter} prior to Spring Security 3.0.

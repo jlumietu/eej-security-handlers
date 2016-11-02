@@ -11,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.eej.security.handler.model.SecurityRoleSpec;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface GrantedAuthoritiesRoleBuilder {

@@ -21,7 +21,7 @@ import com.eej.security.service.model.TokenValidationRequestBaseImpl;
 import com.eej.security.service.model.TokenValidationResponse;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class TokenAuthenticationProvider implements AuthenticationProvider {

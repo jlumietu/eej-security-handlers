@@ -6,7 +6,7 @@ package com.eej.security.model;
 import java.io.Serializable;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface User extends Serializable{

@@ -10,7 +10,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class PasswordEncoderFactory {

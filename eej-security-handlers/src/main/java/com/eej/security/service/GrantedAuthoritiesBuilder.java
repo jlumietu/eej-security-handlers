@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface GrantedAuthoritiesBuilder {

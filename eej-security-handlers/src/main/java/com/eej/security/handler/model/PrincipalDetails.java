@@ -8,7 +8,7 @@ import java.security.Principal;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface PrincipalDetails extends Principal, UserDetails,

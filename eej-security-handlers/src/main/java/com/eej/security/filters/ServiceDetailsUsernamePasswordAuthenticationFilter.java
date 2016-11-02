@@ -25,7 +25,7 @@ import com.eej.security.source.AuthenticationDetailsGenerator;
 import com.eej.security.source.WebAuthenticationDetailsGenerator;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public abstract class ServiceDetailsUsernamePasswordAuthenticationFilter extends

@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class MyGrantedAuthority implements GrantedAuthority {

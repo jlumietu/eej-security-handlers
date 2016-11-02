@@ -8,7 +8,7 @@ import java.io.Serializable;
 import com.eej.security.model.GroupInfo;
 
 /**
- * @author jlumietu
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface GroupInfoDetailsService {
