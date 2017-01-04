@@ -33,7 +33,16 @@ public class SuccessfullAuthenticationEventListener implements ApplicationListen
 		PrincipalSerializableId id = 
 				userIdLocator.find(((InteractiveAuthenticationSuccessEvent) event).getAuthentication());
 		logger.debug("UserRepositorySerializableId found? " + (id==null?"null, not found":id.getClass().getName() + " = " + id.getId()));
-		repository.process(id);		
+		if(id != null){
+			repository.process(id);
+		}else{
+			logger.warn("PrincipalSerializableId not found for authentication principal " + 
+					((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getName() + 
+					". It may be caused for non database based user account. Authentication class is " +
+					((InteractiveAuthenticationSuccessEvent) event).getAuthentication().getClass().getName() +  
+					". This is clearly a TODO." 
+					);
+		}
 	}
 
 	public PrincipalSerializableIdLocator getUserIdLocator() {
