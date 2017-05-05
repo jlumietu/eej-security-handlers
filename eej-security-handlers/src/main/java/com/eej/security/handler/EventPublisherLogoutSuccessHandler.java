@@ -29,8 +29,7 @@ public class EventPublisherLogoutSuccessHandler extends SimpleUrlLogoutSuccessHa
 
 	/**
 	 * 
-	 */
-	@Autowired(required=false)
+	 */	
 	public EventPublisherLogoutSuccessHandler() {
 		super();
 	}
@@ -39,6 +38,7 @@ public class EventPublisherLogoutSuccessHandler extends SimpleUrlLogoutSuccessHa
 	 * @param logger
 	 * @param applicationEventPublisher
 	 */
+	@Autowired(required=false)
 	public EventPublisherLogoutSuccessHandler(ApplicationEventPublisher applicationEventPublisher) {
 		super();
 		this.applicationEventPublisher = applicationEventPublisher;
