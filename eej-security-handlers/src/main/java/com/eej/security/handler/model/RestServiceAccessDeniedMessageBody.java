@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface RestServiceAccessDeniedMessageBody extends Serializable{

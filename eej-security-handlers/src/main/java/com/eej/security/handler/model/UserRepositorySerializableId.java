@@ -15,7 +15,7 @@ import com.erax.principal.PrincipalSerializableId;
  * User or Principal implementations which are loaded in Security Context during authentication
  * stage, to make possible then to relate this with any other action.  
  * 
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface UserRepositorySerializableId extends Serializable, PrincipalSerializableId{

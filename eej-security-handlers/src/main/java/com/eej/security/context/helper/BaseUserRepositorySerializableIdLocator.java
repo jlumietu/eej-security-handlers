@@ -17,7 +17,7 @@ import com.erax.principal.PrincipalSerializableId;
  * Tries to find any UserRepositorySerializableId instance object in some locations inside the Authentication
  * object received as param.
  * 
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class BaseUserRepositorySerializableIdLocator implements UserRepositorySerializableIdLocator {

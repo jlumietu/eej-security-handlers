@@ -16,7 +16,7 @@ import com.eej.security.handler.model.UserRepositorySerializableId;
 import com.erax.principal.PrincipalSerializableId;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class SuccesfullLoginEventPublisher implements ApplicationEventPublisher {

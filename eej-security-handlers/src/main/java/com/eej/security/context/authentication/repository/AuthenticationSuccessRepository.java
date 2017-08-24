@@ -6,7 +6,7 @@ package com.eej.security.context.authentication.repository;
 import com.erax.principal.PrincipalSerializableId;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public interface AuthenticationSuccessRepository {

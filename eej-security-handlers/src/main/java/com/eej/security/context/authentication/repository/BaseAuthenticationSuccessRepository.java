@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
 import com.erax.principal.PrincipalSerializableId;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class BaseAuthenticationSuccessRepository implements AuthenticationSuccessRepository {

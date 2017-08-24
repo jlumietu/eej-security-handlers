@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationEvent;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class SuccessfullLoginEvent extends ApplicationEvent {

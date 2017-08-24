@@ -15,7 +15,7 @@ import com.erax.principal.PrincipalSerializableId;
 import com.erax.principal.PrincipalSerializableIdLocator;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class SuccessfullAuthenticationEventListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {

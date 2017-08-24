@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import com.eej.security.events.InteractiveLogoutSuccessEvent;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class EventPublisherLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {

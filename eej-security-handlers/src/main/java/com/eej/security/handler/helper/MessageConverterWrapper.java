@@ -24,7 +24,7 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import com.eej.security.handler.model.RestServiceAccessDeniedMessageBody;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class MessageConverterWrapper extends GenericMessageConverterWrapper<RestServiceAccessDeniedMessageBody> implements MessageConverterHelper<RestServiceAccessDeniedMessageBody>{

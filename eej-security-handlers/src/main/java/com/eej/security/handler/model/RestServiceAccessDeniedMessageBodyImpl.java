@@ -6,7 +6,7 @@ package com.eej.security.handler.model;
 import com.eej.security.ApplicationVersion;
 
 /**
- * @author DOIBALMI
+ * @author jlumietu - Mikel Ibiricu Alfaro
  *
  */
 public class RestServiceAccessDeniedMessageBodyImpl implements RestServiceAccessDeniedMessageBody {
