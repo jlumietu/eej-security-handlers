@@ -13,13 +13,18 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.DefaultSavedRequest;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
+import org.springframework.web.util.UrlPathHelper;
 
 
 public class SimpleRedirectSessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {
 	
 	private String invalidSessionUrl;
+	
 	private String defaultSavedUrl;
+	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+	
+	private UrlPathHelper urlPathHelper = new UrlPathHelper();
 
 	private final static Logger LOGGER = Logger
 			.getLogger(SimpleRedirectSessionInformationExpiredStrategy.class);
@@ -50,9 +55,23 @@ public class SimpleRedirectSessionInformationExpiredStrategy implements SessionI
 	}
 	
 	protected String determineTargetUrl(HttpServletRequest request) {
-		if(request != null && request.getServletPath() != null){
-			return request.getServletPath();
+		if(request != null && this.getUrlPathHelper().getPathWithinApplication(request) != null){
+			return this.getUrlPathHelper().getPathWithinApplication(request);
 		}
 		return defaultSavedUrl;
 	}
+	/**
+	 * @return the urlPathHelper
+	 */
+	public UrlPathHelper getUrlPathHelper() {
+		return urlPathHelper;
+	}
+	/**
+	 * @param urlPathHelper the urlPathHelper to set
+	 */
+	public void setUrlPathHelper(UrlPathHelper urlPathHelper) {
+		this.urlPathHelper = urlPathHelper;
+	}
+	
+	
 }
